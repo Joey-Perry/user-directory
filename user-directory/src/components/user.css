@@ -1,0 +1,39 @@
+.user {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    align-items:flex-start;
+    padding: 50px;
+    position: relative;
+    background-color: white;
+}
+.name {
+    margin-bottom: 20px;
+    text-decoration: underline lightblue;
+}
+
+h3 {
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+.index {
+    position: absolute;
+    top: 0;
+    right: 50px;
+}
+
+.movie-list {
+    display: flex;
+    margin-left: 50px;
+    text-align:left;
+}
+
+.movie-list ol li {
+    margin-bottom: 5px;
+}
+
+.employer {
+    margin-bottom: 30px;
+}
+

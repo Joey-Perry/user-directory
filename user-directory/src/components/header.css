@@ -1,0 +1,11 @@
+.header {
+    background-color: rgb(42, 171, 226);
+    height: 10vh;
+    display: flex;
+    align-items: center;
+}
+
+.header h3 {
+    margin-left: 50px;
+    font-weight: bold;
+}
