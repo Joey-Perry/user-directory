@@ -1,14 +1,15 @@
 import React from 'react';
 import './input.css';
 
-const Input = ({fieldName, onChange}) => {
+const Input = ({field, fieldName, onChange}) => {
 
         return (
             <div className='custom-input'>
-            <label for={fieldName}>{fieldName}</label>
+            <label htmlFor={fieldName}>{fieldName}</label>
             <input 
-                onChange={onChange}
-                value={this.state.input}/>
+                id={fieldName}
+                onChange={onChange} 
+                value={field}/>
             </div>
         )
     }

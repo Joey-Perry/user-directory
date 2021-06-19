@@ -20,7 +20,7 @@ class App extends Component {
       country: '',
       title: '',
       employer: '',
-      favoriteMovies: [],
+      favoriteMovies: '',
     }
 
     this.displayNextUser = this.displayNextUser.bind(this);
@@ -29,6 +29,7 @@ class App extends Component {
     this.deleteActiveUser = this.deleteActiveUser.bind(this);
     this.createNewUser = this.createNewUser.bind(this);
     this.obtainNewUserInformation = this.obtainNewUserInformation.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount(){
@@ -72,7 +73,11 @@ class App extends Component {
 
   createNewUser(){
     // display form
-    this.setState({ displayForm: true});
+    if (this.state.displayForm){
+      this.setState({ displayForm: false})
+    } else {
+      this.setState({ displayForm: true});
+    }
   }
 
   obtainNewUserInformation(){
@@ -80,15 +85,58 @@ class App extends Component {
     const newUser = {
       id: 101,
       name: {first: firstName, last: lastName},
-      city, country, employer, title, favoriteMovies
-    }
+      city, country, employer, title }
+      let moviesCopy = favoriteMovies.slice();
+    const favoriteMovieArray = moviesCopy.split(',');
+    newUser.favoriteMovies = favoriteMovieArray;
     let listCopy = userList.slice();
     listCopy.push(newUser);
-    this.setState({ userList: listCopy, activeUser: listCopy.indexOf(newUser) });
+    this.setState({ 
+      userList: listCopy, activeUser: newUser,
+      firstName: '', lastName: '', city: '', country: '', employer: '', title: '', favoriteMovies: '' ,
+    displayForm: false });
   }
 
-  handleChange(event, formField){
-    this.setState({ formField: event.target.value })
+  updateFirstName(val){
+    this.setState({ firstName: val });
+  }
+  updateLastName(val){
+    this.setState({ lastName: val });
+  }
+  updateCity(val){
+    this.setState({ city: val });
+  }
+  updateCountry(val){
+    this.setState({ country: val });
+  }
+  updateEmployer(val){
+    this.setState({ employer: val });
+  }
+  updateTitle(val){
+    this.setState({ title: val });
+  }
+  updateMovies(val){
+    this.setState({ favoriteMovies: val });
+  }
+
+  handleChange(event){
+    if (event.target.id === 'First Name'){
+      this.updateFirstName(event.target.value);
+    } else if (event.target.id === 'Last Name'){
+      this.updateLastName(event.target.value);
+    } else if (event.target.id === 'City'){
+      this.updateCity(event.target.value);
+    } else if (event.target.id === 'Country'){
+      this.updateCountry(event.target.value);
+    } else if (event.target.id === 'Employer'){
+      this.updateEmployer(event.target.value);
+    } else if (event.target.id === 'Job Title'){
+      this.updateTitle(event.target.value);
+    } else if (event.target.id === 'Favorite Movies'){
+      this.updateMovies(event.target.value);
+    } else {
+      console.log(event.target.id);
+    }
   }
 
   render(){

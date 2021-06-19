@@ -2,7 +2,7 @@ import React from 'react';
 import CustomInput from './Input.js';
 import './form.css'
 
-const Form = ({onSubmit, onChange, first, last, city, country, employer, title, favoriteMovies }) => {
+const Form = ({onSubmit, onChange, first, last, city, country, employer, title, movies }) => {
 
 
     const submitForm = (e) => {
@@ -14,7 +14,7 @@ const Form = ({onSubmit, onChange, first, last, city, country, employer, title, 
             <form className='new-user-form'>
                 <h1> Enter new user: </h1>
                     <div className='form-name'>
-                        <CustomInput onChange={(event, first) => onChange(event, first)} fieldName='First Name'/>
+                        <CustomInput onChange={(event) => onChange(event)} field={first} fieldName='First Name'/>
                         <CustomInput  onChange={onChange} field={last} fieldName='Last Name'/>
                     </div>
 
@@ -28,7 +28,7 @@ const Form = ({onSubmit, onChange, first, last, city, country, employer, title, 
                         <CustomInput onChange={onChange} field={employer} fieldName='Employer'/>
                     </div>
 
-                    <CustomInput onChange={onChange} field={favoriteMovies} fieldName='Favorite Movies'/>
+                    <CustomInput onChange={onChange} field={movies} fieldName='Favorite Movies'/>
 
                     <button onClick={submitForm} className='form-btn'>SUBMIT</button>
             </form>
