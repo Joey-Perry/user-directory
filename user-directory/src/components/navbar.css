@@ -1,0 +1,31 @@
+.nav-bar {
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.change-list-btns {
+    /* border: 2px solid yellow; */
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-bar button {
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    border-color: transparent;
+    font-size: 18px;
+}
+
+.change-list-btns button {
+    background-color: rgb(42, 171, 226);
+    padding: 5px 7px;
+    border-radius: 10px;
+}
+
+.nav-bar button:hover {
+    cursor: pointer;
+}
