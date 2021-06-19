@@ -1,12 +1,10 @@
 .nav-bar {
-    /* border: 2px solid red; */
     display: flex;
     justify-content: space-between;
     padding: 10px;
 }
 
 .change-list-btns {
-    /* border: 2px solid yellow; */
     width: 30%;
     display: flex;
     justify-content: space-around;

@@ -4,20 +4,35 @@ import Header from './components/Header';
 import User from './components/User';
 import NavBar from './components/NavBar';
 import dataList from './data/data';
+import Form from './components/Form';
 
 class App extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-      userList: dataList,
-      activeUser: dataList[0],
+      userList: [],
+      activeUser: {},
+      displayForm: false,
+      firstName: '',
+      lastName: '',
+      city: '',
+      country: '',
+      title: '',
+      employer: '',
+      favoriteMovies: [],
     }
+
     this.displayNextUser = this.displayNextUser.bind(this);
     this.displayPreviousUser = this.displayPreviousUser.bind(this);
     this.editActiveUser = this.editActiveUser.bind(this);
     this.deleteActiveUser = this.deleteActiveUser.bind(this);
     this.createNewUser = this.createNewUser.bind(this);
+    this.obtainNewUserInformation = this.obtainNewUserInformation.bind(this);
+  }
+
+  componentDidMount(){
+    this.setState({ userList: dataList, activeUser: dataList[0]})
   }
 
   displayNextUser(){
@@ -29,7 +44,7 @@ class App extends Component {
     } else {
       nextIndex = currentIndex + 1;
     }
-    this.setState({ activeUser: dataList[nextIndex]})
+    this.setState({ activeUser: userList[nextIndex]})
   }
 
   displayPreviousUser(){
@@ -41,7 +56,7 @@ class App extends Component {
     } else {
       previousIndex = currentIndex - 1;
     }
-    this.setState({ activeUser: dataList[previousIndex]})
+    this.setState({ activeUser: userList[previousIndex]})
   }
 
   editActiveUser(){
@@ -49,28 +64,58 @@ class App extends Component {
   }
 
   deleteActiveUser(){
-
+    const { userList, activeUser } = this.state;
+    const updatedList = userList.filter(userObj => !(userObj.id === activeUser.id));
+    this.setState({ userList: updatedList });
+    this.displayNextUser();
   }
 
   createNewUser(){
+    // display form
+    this.setState({ displayForm: true});
+  }
 
+  obtainNewUserInformation(){
+    const {userList, firstName, lastName, city, country, employer, title, favoriteMovies } = this.state;
+    const newUser = {
+      id: 101,
+      name: {first: firstName, last: lastName},
+      city, country, employer, title, favoriteMovies
+    }
+    let listCopy = userList.slice();
+    listCopy.push(newUser);
+    this.setState({ userList: listCopy, activeUser: listCopy.indexOf(newUser) });
+  }
+
+  handleChange(event, formField){
+    this.setState({ formField: event.target.value })
   }
 
   render(){
-    return (
-      <div className='App'>
-        <Header />
-        <div className='App-body'>
-          <User activeUser={this.state.activeUser} userList={this.state.userList}/>
-          <NavBar 
-            nextUser={this.displayNextUser}
-            previousUser={this.displayPreviousUser}
-            editUser={this.editActiveUser}
-            deleteUser={this.deleteActiveUser}
-            createUser={this.createNewUser}/>
+
+    if (!this.state.activeUser.name){
+      console.log('connected but loading');
+      return <p> Loading </p>
+    } else {
+      const {userList, activeUser, firstName, lastName, city, country, employer, title, favoriteMovies } = this.state;
+      return (
+        <div className='App'>
+          <Header />
+          <div className='App-body'>
+            <User activeUser={activeUser} userList={userList}/>
+            <NavBar 
+              nextUser={this.displayNextUser}
+              previousUser={this.displayPreviousUser}
+              editUser={this.editActiveUser}
+              deleteUser={this.deleteActiveUser}
+              createUser={this.createNewUser}/>
+              {this.state.displayForm && <Form 
+                first={firstName} last={lastName} city={city} country={country} employer={employer} title={title} movies={favoriteMovies}
+                onSubmit={this.obtainNewUserInformation} onChange={this.handleChange}/>}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
 

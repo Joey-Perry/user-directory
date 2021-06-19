@@ -2,12 +2,15 @@ import React from 'react';
 import './user.css'
 
 const User = ({activeUser, userList}) => {
-        const {id, name, city, country, title, employer, favoriteMovies} = activeUser;
+    
+        const {name, city, country, title, employer, favoriteMovies} = activeUser;
         const listLength = userList.length;
+        const index = userList.indexOf(activeUser);
 
         return (
             <section className='user'>
-                <h2 className='index'>{id} / {listLength}</h2>
+                {/* <h2 className='index'>{id} / {listLength}</h2> */}
+                <h2 className='index'>{index + 1} / {listLength}</h2>
 
                 <h1 className='name'>{name.first} {name.last}</h1>
 
