@@ -61,6 +61,18 @@ class App extends Component {
   }
 
   editActiveUser(){
+    // const { userList, activeUser } = this.state;
+    // this.setState({ 
+    //   firstName: activeUser.name.first, 
+    //   lastName: activeUser.name.last, 
+    //   city: activeUser.city,
+    //   country: activeUser.country,
+    //   employer: activeUser.employer,
+    //   title: activeUser.title,
+    //   favoriteMovies: activeUser.favoriteMovies,
+    //   displayForm: true });
+      console.log('Edit functionality does not work yet');
+
 
   }
 
@@ -86,9 +98,18 @@ class App extends Component {
       id: 101,
       name: {first: firstName, last: lastName},
       city, country, employer, title }
-      let moviesCopy = favoriteMovies.slice();
-    const favoriteMovieArray = moviesCopy.split(',');
-    newUser.favoriteMovies = favoriteMovieArray;
+    
+      if (Array.isArray(favoriteMovies)){
+        console.log('first');
+        console.log({favoriteMovies});
+        newUser.favoriteMovies = favoriteMovies;
+      } else {
+        console.log('second');
+        let moviesCopy = favoriteMovies.slice();
+        const favoriteMovieArray = moviesCopy.split(',');
+        newUser.favoriteMovies = favoriteMovieArray;
+      }
+
     let listCopy = userList.slice();
     listCopy.push(newUser);
     this.setState({ 
